@@ -9,7 +9,6 @@ from src.database.mongo_client import get_collection
 from src.database.redis_client import get_saldo
 from src.producer import broker, publish_corrida_finalizada
 
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -19,11 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.on_event("startup")
 async def startup():
     await broker.start()
-
 
 @app.on_event("shutdown")
 async def shutdown():
@@ -45,7 +42,6 @@ async def listar_corridas():
         itens.append(d)
     return itens
 
-
 @app.get("/corridas/{forma_pagamento}", response_model=List[dict])
 async def listar_por_pagamento(forma_pagamento: str):
     coll = get_collection()
@@ -53,7 +49,6 @@ async def listar_por_pagamento(forma_pagamento: str):
     async for d in coll.find({"forma_pagamento": forma_pagamento}, {"_id": 0}):
         itens.append(d)
     return itens
-
 
 @app.get("/saldo/{motorista}")
 async def saldo_motorista(motorista: str):
@@ -71,9 +66,7 @@ async def listar_saldos():
         resultados.append({"motorista": nome, "saldo": s})
     return resultados
 
-
 app.mount("/ui", StaticFiles(directory="src/static", html=True), name="ui")
-
 
 @app.get("/config")
 async def get_config():
