@@ -20,5 +20,4 @@ async def process_corrida(msg: dict):
 
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(app.start())
+    asyncio.run(app.run())
