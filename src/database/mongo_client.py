@@ -1,9 +1,7 @@
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 
-
 _client: AsyncIOMotorClient | None = None
-
 
 def get_client() -> AsyncIOMotorClient:
     global _client
@@ -11,7 +9,6 @@ def get_client() -> AsyncIOMotorClient:
         url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
         _client = AsyncIOMotorClient(url)
     return _client
-
 
 def get_collection():
     client = get_client()
