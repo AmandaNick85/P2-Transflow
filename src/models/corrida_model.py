@@ -1,15 +1,12 @@
 from pydantic import BaseModel, field_validator
 
-
 class Passageiro(BaseModel):
     nome: str
     telefone: str
 
-
 class Motorista(BaseModel):
     nome: str
     nota: float
-
 
 class Corrida(BaseModel):
     id_corrida: str
